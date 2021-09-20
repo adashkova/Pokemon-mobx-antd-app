@@ -15,7 +15,7 @@ const PaginationContainer = observer(({ page }) => {
     console.log(page, pageSize);
     store.offset = page * 20;
     store.per_page = pageSize;
-    window.location.assign(`http://localhost:3000/?page=${page}`);
+    window.location.assign(`?page=${page}`);
   };
 
   return !store.name && !store.type ? (

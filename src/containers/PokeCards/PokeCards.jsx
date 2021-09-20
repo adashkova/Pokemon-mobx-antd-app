@@ -52,7 +52,7 @@ const PokeCards = observer(({ query }) => {
     showModal();
   };
   const onClickRedirect = () => {
-    window.location.assign(`http://localhost:3000/?page=${1}`);
+    window.location.assign(`?page=${1}`);
     store.name = null;
     store.type = null;
   };

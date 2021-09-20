@@ -17,11 +17,11 @@ const SearchBox = observer(() => {
     }
 
     if (value && !store.isSearchByType) {
-      window.location.assign(`http://localhost:3000/?name=${searchValue}`);
+      window.location.assign(`?name=${searchValue}`);
     }
 
     if (value && store.isSearchByType) {
-      window.location.assign(`http://localhost:3000/?type=${searchValue}`);
+      window.location.assign(`?type=${searchValue}`);
     }
   };
 
