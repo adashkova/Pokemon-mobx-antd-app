@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import {  useHistory } from 'react-router-dom';
 import MainStore from '../../stores/MainStore';
 import { PageHeader } from 'antd';
 import 'antd/dist/antd.css';
@@ -19,7 +19,7 @@ const Header = () => {
 
   return (
     <>
-      <Redirect to="/?page=1" />
+     
 
       <PageHeader
         className="site-page-header"
