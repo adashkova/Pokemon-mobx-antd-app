@@ -18,20 +18,21 @@ function App() {
 
       <div className="App">
         <div className="container">
-          <h4>
-            You can search your favorite pokemons by name or select them by
-            type. For example: 'BULBASAUR' or 'Poison'
-          </h4>
+          <div>
+            <h3 className="prompt">
+              You can search your favorite pokemons by name or select them by
+              type. For example: 'BULBASAUR' or 'Poison'
+            </h3>
+          </div>
 
           <SearchBox />
           <SelectBlock />
           <ButtonBox page={+query.get('page')} />
 
           <div className="cards_container">
-            <PokeCards query={query} />
+            <PokeCards />
           </div>
         </div>
-
         <PaginationContainer page={+query.get('page')} />
       </div>
     </>

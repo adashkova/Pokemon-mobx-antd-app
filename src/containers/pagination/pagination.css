@@ -1,8 +1,11 @@
 .pagination {
   display: flex;
   flex-direction: row;
-  margin-bottom: 20px;
+  margin-left: 50px;
 }
-.link {
-  margin-right: 15px;
+.margin {
+  height: 50px;
+}
+.ml {
+  margin-left: 100px;
 }

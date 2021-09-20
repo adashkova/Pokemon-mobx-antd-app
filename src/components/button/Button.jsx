@@ -17,7 +17,7 @@ const ButtonBox = observer(() => {
   return (
     <>
       <Button onClick={e => onClick(e)} type="primary">
-        Back
+        Home
       </Button>
     </>
   );

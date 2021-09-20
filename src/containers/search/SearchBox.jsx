@@ -1,14 +1,15 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-
+import { useHistory } from 'react-router-dom';
 import { Input } from 'antd';
 import 'antd/dist/antd.css';
 import MainStore from '../../stores/MainStore';
 
 const SearchBox = observer(() => {
   const { Search } = Input;
-
   const store = MainStore;
+
+  const history = useHistory();
 
   const onSearch = value => {
     const searchValue = value.toLowerCase();
@@ -17,11 +18,17 @@ const SearchBox = observer(() => {
     }
 
     if (value && !store.isSearchByType) {
-      window.location.assign(`?name=${searchValue}`);
+      history.push(`?name=${searchValue}`);
+      store.type = null;
+      store.name = searchValue;
+      store.fetchWithDetails();
     }
 
     if (value && store.isSearchByType) {
-      window.location.assign(`?type=${searchValue}`);
+      history.push(`?type=${searchValue}`);
+      store.name = null;
+      store.type = searchValue;
+      store.fetchWithDetails();
     }
   };
 

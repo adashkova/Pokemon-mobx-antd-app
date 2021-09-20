@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
+import { useQuery } from '../../hooks/useQuery';
 import { Card, Modal, Button, Spin } from 'antd';
 import 'antd/dist/antd.css';
 import MainStore from '../../stores/MainStore';
@@ -7,9 +9,12 @@ import { observer } from 'mobx-react-lite';
 import { Link } from 'react-router-dom';
 import { runInAction } from 'mobx';
 
-const PokeCards = observer(({ query }) => {
+const PokeCards = observer(() => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [foundPokemon, setFoundPokemon] = useState({});
+
+  let query = useQuery();
+  const history = useHistory();
 
   const { Meta } = Card;
   const store = MainStore;
@@ -18,9 +23,10 @@ const PokeCards = observer(({ query }) => {
     store.page = +query.get('page');
     store.name = query.get('name');
     store.type = query.get('type');
-
+    history.push(`?page=1`);
     store.fetchWithDetails();
   };
+
   // GET POKEMONS FROM API
 
   useEffect(() => {
@@ -51,6 +57,7 @@ const PokeCards = observer(({ query }) => {
     setFoundPokemon(newfoundPokemon);
     showModal();
   };
+
   const onClickRedirect = () => {
     window.location.assign(`?page=${1}`);
     store.name = null;
@@ -115,7 +122,7 @@ const PokeCards = observer(({ query }) => {
           <p>{`Weight: ${foundPokemon[0].weight}`}</p>
         </Modal>
       )}
-      {pokemons.length === 0 && (
+      {pokemons.length === 0 && !store.isLoading && (
         <div>
           <div>No found pokemon. May be you write wrong name! Try again!</div>
 

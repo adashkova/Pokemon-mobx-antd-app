@@ -1,35 +1,40 @@
 import React from 'react';
 import MainStore from '../../stores/MainStore';
 import { observer } from 'mobx-react-lite';
-
+import { useHistory } from 'react-router-dom';
 import { Pagination } from 'antd';
-import './pagination.css';
 import 'antd/dist/antd.css';
+import './pagination.css';
 
 const PaginationContainer = observer(({ page }) => {
   const store = MainStore;
 
+  const history = useHistory();
+
   const initPage = page === 0 ? 1 : +page;
 
   const setPage = (page, pageSize) => {
-    console.log(page, pageSize);
     store.offset = page * 20;
     store.per_page = pageSize;
-    window.location.assign(`?page=${page}`);
+    history.push(`?page=${page}`);
+    store.page = +page;
+    store.fetchWithDetails();
   };
 
   return !store.name && !store.type ? (
-    <Pagination
-      onChange={(page, pageSize) => {
-        setPage(page, pageSize);
-      }}
-      defaultCurrent={initPage}
-      total={954}
-      pageSize={store.per_page}
-      style={{
-        marginLeft: '20px',
-      }}
-    />
+    <>
+      <div className="ml">
+        <Pagination
+          onChange={(page, pageSize) => {
+            setPage(page, pageSize);
+          }}
+          defaultCurrent={initPage}
+          total={954}
+          pageSize={store.per_page}
+        />
+      </div>
+      <div className="margin"></div>
+    </>
   ) : (
     <div></div>
   );
